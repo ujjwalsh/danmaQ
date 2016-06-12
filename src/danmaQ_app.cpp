@@ -75,7 +75,7 @@ DMApp::DMApp() {
 
 
 	this->show();
-	QDesktopWidget	desktop;
+	QDesktopWidget desktop;
 	auto center = desktop.screenGeometry(desktop.primaryScreen()).center();
 	this->move(center.x() - this->width()/2, center.y() - this->height()/2);
 }

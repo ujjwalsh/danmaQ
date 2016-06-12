@@ -2,18 +2,19 @@
 #define __DANMAKU_WINDOW_H__
 #include <QWidget>
 #include <QVector>
-#include "danmaQ_app.h"
 #include "danmaku_ui.h"
+
+class BaseDanmakuApp;
 
 class DMWindow: public QWidget
 {
 	Q_OBJECT
 
 public:
-	DMWindow(DMApp *parent);
-	DMWindow(int screenNumber, DMApp *parent);
+	DMWindow(BaseDanmakuApp *parent);
+	DMWindow(int screenNumber, BaseDanmakuApp *parent);
 	~DMWindow();
-	DMApp *app;
+	BaseDanmakuApp *app;
 
 	int slot_y(int slot);
 
@@ -25,6 +26,8 @@ public slots:
 
 private:
 	QVector<bool> fly_slots, fixed_slots;
+	int lineHeight;
+	
 	void init_slots();
 	int allocate_slot(Position);
 	QString escape_text(QString &);

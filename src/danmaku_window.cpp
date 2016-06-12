@@ -17,7 +17,7 @@
 #include "danmaku.h"
 
 
-DMWindow::DMWindow(int screenNumber, DMApp *parent)
+DMWindow::DMWindow(int screenNumber, BaseDanmakuApp *parent)
 {
 	this->setParent(parent);
 	this->app = parent;
@@ -39,6 +39,12 @@ DMWindow::DMWindow(int screenNumber, DMApp *parent)
 	this->setAttribute(Qt::WA_TransparentForMouseEvents, true);
 	this->setStyleSheet("background: transparent");
 
+
+	this->lineHeight = 42;
+	if (this->app != NULL) {
+		this->lineHeight = this->app->lineHeight;
+	}
+
 	this->move(geo.topLeft());
 	this->init_slots();
 	
@@ -53,13 +59,13 @@ DMWindow::DMWindow(int screenNumber, DMApp *parent)
 
 }
 
-DMWindow::DMWindow(DMApp *parent): DMWindow(0, parent){};
+DMWindow::DMWindow(BaseDanmakuApp *parent): DMWindow(0, parent){};
 
 void DMWindow::init_slots()
 {
 	int height = this->height();
-	int nlines = (height - 2*VMARGIN) / (this->app->lineHeight);
-	myDebug << nlines << this->app->lineHeight;
+	int nlines = (height - 2*VMARGIN) / this->lineHeight;
+	myDebug << nlines << lineHeight;
 	for(int i=0; i<nlines; i++) {
 		this->fly_slots.append(false);
 		this->fixed_slots.append(false);
@@ -111,11 +117,11 @@ int DMWindow::allocate_slot(Position position) {
 
 int DMWindow::slot_y(int slot)
 {
-	return (this->app->lineHeight * slot + VMARGIN);
+	return (this->lineHeight * slot + VMARGIN);
 }
 
 QString DMWindow::escape_text(QString & text) {
-	QString escaped = Qt::escape(text);
+	QString escaped = text.toHtmlEscaped();
 
 	escaped.replace(QRegExp("([^\\\\])\\\\n"), "\\1<br/>");
 	escaped.replace(QRegExp("\\\\\\\\n"), "\\n");

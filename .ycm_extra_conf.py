@@ -39,12 +39,12 @@ flags = [
 '-DQT_XML_LIB',
 
 '-I', '/usr/lib/qt/mkspecs/linux-clang',
-'-I', '/usr/include/qt4',
-'-I', '/usr/include/qt4/QtCore',
-'-I', '/usr/include/qt4/QtGui',
-'-I', '/usr/include/qt4/QtNetwork',
-'-I', '/usr/include/qt4/QtWidgets',
-'-I', '/usr/include/qjson',
+'-I', '/usr/include/qt/',
+'-I', '/usr/include/qt/QtCore',
+'-I', '/usr/include/qt/QtGui',
+'-I', '/usr/include/qt/QtNetwork',
+'-I', '/usr/include/qt/QtWidgets',
+'-I', '/usr/include/qt/QtX11Extras',
 '-I', '/usr/include/X11',
 '-I', '/usr/include/X11/extensions',
 

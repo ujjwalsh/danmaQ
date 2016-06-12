@@ -7,6 +7,7 @@
 #include <QSystemTrayIcon>
 #include <QMenu>
 #include <QAction>
+#include "danmaQ_app_base.h"
 
 class Subscriber;
 
@@ -31,20 +32,15 @@ private:
 };
 
 
-class DMApp: public QWidget
+class DMApp: public BaseDanmakuApp
 {
 	Q_OBJECT
 
 public:
 	DMApp();
 
-	int lineHeight, fontSize, screenCount;
-	QString fontFamily;
-	float speedScale;
-
 	QLineEdit *server, *channel, *passwd;
 	QPushButton *configBtn, *hideBtn, *mainBtn;
-	
 
 public slots:
 	void reset_windows();

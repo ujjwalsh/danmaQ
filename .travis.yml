@@ -8,10 +8,19 @@ matrix:
     - os: osx
     - os: linux
       env: BUILD_FLAVOR=fedora
+      arch:
+        - amd64
+        - ppc64le
     - os: linux
       env: BUILD_FLAVOR=ubuntu
+      arch:
+        - amd64
+        - ppc64le   
     - os: linux
       env: BUILD_FLAVOR=debian
+      arch:
+        - amd64
+        - ppc64le
 
 before_install:
     - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update ; fi
